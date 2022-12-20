@@ -10,7 +10,8 @@ public class BuildPlayer : MonoBehaviour
     public static void JenkinsBuilder()
     {
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-        buildPlayerOptions.scenes = new[] { "Assets/Scenes/LobbyScene.unity" };
+        string[] scenes = UnityEditor.EditorBuildSettingsScene.GetActiveSceneList(UnityEditor.EditorBuildSettings.scenes);
+        buildPlayerOptions.scenes = scenes;
         buildPlayerOptions.locationPathName = "BuildT/MiniPuzzle_1chance.exe";
         //buildPlayerOptions.locationPathName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
