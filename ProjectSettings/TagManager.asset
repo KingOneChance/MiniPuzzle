@@ -7,6 +7,8 @@ TagManager:
   - CheckPoint
   - Present
   - Bomb
+  - LeftPos
+  - RightPos
   layers:
   - Default
   - TransparentFX

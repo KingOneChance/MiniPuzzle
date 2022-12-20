@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   canMove: 0
-  moveSpeed: 0
+  moveSpeed: 1
   leftPos: {fileID: 0}
   rightPos: {fileID: 0}
   targetPos: {fileID: 0}
