@@ -6,6 +6,7 @@ public class PresentMove : MonoBehaviour
 {
     [SerializeField] private GameObject leftPos;
     [SerializeField] private GameObject rightPos;
+    [SerializeField] private GameObject goldPos;
     [SerializeField] private GameObject centerPos;
     [SerializeField] private GameObject targetPos = null;
     [SerializeField] private PlayerInput playerInput;
@@ -38,12 +39,15 @@ public class PresentMove : MonoBehaviour
             case -1:
                 targetPos = leftPos;
                 break;
+            case 0:
+                targetPos = goldPos;
+                break;
         }
         Move();
     }
     private void Move()
     {
-        //상태가 선물일 경우 
+        //상태가 빨강 경우 
         if (presentInfo.stateInfo == PresentInfo.PresentState.Red)
         {
 
@@ -51,21 +55,19 @@ public class PresentMove : MonoBehaviour
             //   StartCoroutine(Co_PresentMove());
             if (targetPos == rightPos)
             {
-                Debug.Log("빨강 점수 증가");
-                GameMGR._instance.AddScore();
+                GameMGR._instance.AddScore(10);
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
             else if (targetPos == leftPos)
             {
-                Debug.Log("빨강 얼음");
                 //일시적으로 키입력 막는 로직
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
             }
         }
-        //상태가 폭탄일 경우
+        //상태가 파랑 경우
         else if (presentInfo.stateInfo == PresentInfo.PresentState.Blue)
         {
             presentInfo.PresentMove(targetPos);
@@ -73,19 +75,23 @@ public class PresentMove : MonoBehaviour
             //이동 시키기 
             if (targetPos == leftPos)
             {
-                Debug.Log("점수 증가");
-                GameMGR._instance.AddScore();
+                GameMGR._instance.AddScore(10);
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
             else if (targetPos == rightPos)
             {
-                Debug.Log("얼음");
                 //일시적으로 키입력 막는 로직
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
             }
+        }
+        //상태가 골드 경우
+        else if (presentInfo.stateInfo == PresentInfo.PresentState.Gold)
+        {
+            presentInfo.PresentMove(targetPos);
+            GameMGR._instance.AddScore(20);
         }
     }
     private void PauseCancle() => playerInput.UnFreezeClick();
@@ -93,6 +99,5 @@ public class PresentMove : MonoBehaviour
     {
         present = firstPresent;
         presentInfo = present.GetComponent<PresentInfo>();
-        // presentRigidBody = present.GetComponent<Rigidbody>();
     }
 }
