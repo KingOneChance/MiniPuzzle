@@ -111,4 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  spawnManger: {fileID: 0}
+  spawnManager: {fileID: 0}
+  playerInput: {fileID: 0}

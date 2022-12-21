@@ -29,7 +29,7 @@ public class PresentInfo : MonoBehaviour
 
     public void ActiveFalse()
     {
-        playerInput.canClick = true;
+        playerInput.RestartClick();
         spawnManager.ChangePosition();
     }
 
