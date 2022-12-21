@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameMGR : MonoBehaviour
 {
+    #region GameMGR Singleton
     private static GameMGR instance;
     public static GameMGR _instance
     {
@@ -11,13 +12,23 @@ public class GameMGR : MonoBehaviour
         {
             if (instance == null)
             {
-                GameMGR NewGameMGr = FindObjectOfType<GameMGR>();
-                if (NewGameMGr == null)
+                instance = FindObjectOfType<GameMGR>();
+                if (instance == null)
                     instance = new GameObject("GameMgr").AddComponent<GameMGR>();
-                else
-                    instance = NewGameMGr; 
             }
-            return _instance;
+            return instance;
         }
+    }
+    #endregion
+
+    [SerializeField] private float score;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void AddScore()
+    {
+        score += 10;
     }
 }

@@ -15,7 +15,7 @@ public class PresentMove : MonoBehaviour
 
     [SerializeField] private GameObject present = null;
     [SerializeField] private PresentInfo presentInfo = null;
-   // [SerializeField] private Rigidbody presentRigidBody = null;
+    // [SerializeField] private Rigidbody presentRigidBody = null;
 
     [SerializeField] private float moveSpeed = 1;
 
@@ -46,35 +46,51 @@ public class PresentMove : MonoBehaviour
         //상태가 선물일 경우 
         if (presentInfo.stateInfo == PresentInfo.PresentState.Red)
         {
-            Debug.Log("?");
+
             presentInfo.PresentMove(targetPos);
             //   StartCoroutine(Co_PresentMove());
             if (targetPos == rightPos)
             {
+                Debug.Log("빨강 점수 증가");
+                GameMGR._instance.AddScore();
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
+            }
+            else if (targetPos == leftPos)
+            {
+                Debug.Log("빨강 얼음");
+                //일시적으로 키입력 막는 로직
+                playerInput.FreezeClick();
+                Invoke("PauseCancle", 3f);
             }
         }
         //상태가 폭탄일 경우
         else if (presentInfo.stateInfo == PresentInfo.PresentState.Blue)
         {
-            Debug.Log("?");
             presentInfo.PresentMove(targetPos);
             //  StartCoroutine(Co_PresentMove());
             //이동 시키기 
-            if (targetPos == rightPos)
+            if (targetPos == leftPos)
             {
+                Debug.Log("점수 증가");
+                GameMGR._instance.AddScore();
+                //UI 점수 올려주는 함수 호출 
+                //함수 어쩌록 입력하기 
+            }
+            else if (targetPos == rightPos)
+            {
+                Debug.Log("얼음");
                 //일시적으로 키입력 막는 로직
-                playerInput.canClick = false;
-                Invoke("PauseCancle", 1f);
+                playerInput.FreezeClick();
+                Invoke("PauseCancle", 3f);
             }
         }
     }
-    private void PauseCancle() => playerInput.canClick = true;
+    private void PauseCancle() => playerInput.UnFreezeClick();
     private void FirstPresent(GameObject firstPresent)
     {
         present = firstPresent;
         presentInfo = present.GetComponent<PresentInfo>();
-       // presentRigidBody = present.GetComponent<Rigidbody>();
+        // presentRigidBody = present.GetComponent<Rigidbody>();
     }
 }
