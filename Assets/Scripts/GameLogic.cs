@@ -10,14 +10,13 @@ public class GameLogic : MonoBehaviour
 
     [SerializeField] private GameObject cubePrefabs = null;
     [SerializeField] private Transform[] spawnPoints = null;
+    [SerializeField] private PlayerInput playerInput = null;
     [SerializeField] private float moveSpeed = 1;
 
     public int ItemCount = 20;
 
     //아이템 풀을 담을 큐
     Queue<GameObject> itemQueue = new Queue<GameObject>();
-    Queue<GameObject> itemQueue1 = new Queue<GameObject>();
-    Queue<GameObject> itemQueue2 = new Queue<GameObject>();
 
     //활성화되어있는 큐브들
     private List<GameObject> cubes = new List<GameObject>();
@@ -31,12 +30,13 @@ public class GameLogic : MonoBehaviour
             itemQueue.Enqueue(cube);
             cube.SetActive(false);
         }
+        playerInput = FindObjectOfType<PlayerInput>();
         SpawnCube();
     }
 
     void SpawnCube()
     {
-        for (int i = 0; i < spawnPoints.Length-1; i++)
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
         {
             //큐에서 꺼내고
             GameObject cube = itemQueue.Dequeue();
@@ -57,10 +57,10 @@ public class GameLogic : MonoBehaviour
     {
         List<GameObject> newCubes = new List<GameObject>();
 
-        for (int i = 1; i < spawnPoints.Length-1; i++)
+        for (int i = 1; i < spawnPoints.Length - 1; i++)
         {
             // cubes[i].transform.Translate(Vector3.back);
-            StartCoroutine(Co_PreBoxMove(cubes[i]));
+            StartCoroutine(Co_PreBoxMove(cubes[i], i));
             newCubes.Add(cubes[i]);
         }
         //맨앞 상자 오브젝트 전달
@@ -69,9 +69,10 @@ public class GameLogic : MonoBehaviour
         GameObject cube = itemQueue.Dequeue();
         cube.SetActive(true);
         cube.transform.position = spawnPoints[6].transform.position;
-        cube.transform.rotation = Quaternion.identity;  
+        cube.transform.rotation = Quaternion.identity;
         cubes = newCubes;
         cubes.Add(cube);
+        StartCoroutine(Co_PreBoxMove(cube, 6));
     }
 
     public void ReCycle(GameObject present)
@@ -80,15 +81,19 @@ public class GameLogic : MonoBehaviour
     }
 
     WaitForFixedUpdate time = new WaitForFixedUpdate();
-    IEnumerator Co_PreBoxMove(GameObject cube)
+    IEnumerator Co_PreBoxMove(GameObject cube, int num)
     {
+        if (num == 1)
+            playerInput.arriveFirstPos = false;
         int i = 0;
-        while (i < 8)
+        while (i < 4)
         {
-            cube.transform.Translate(Vector3.forward * -0.25f * moveSpeed);
+            cube.transform.Translate(Vector3.forward * -0.5f * moveSpeed);
             i++;
             yield return time;
         }
-        yield return time;
+        if (num == 1)
+            playerInput.arriveFirstPos = true;
+            yield return time;
     }
 }
