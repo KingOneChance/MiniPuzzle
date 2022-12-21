@@ -17,8 +17,11 @@ public class GameLogic : MonoBehaviour
     //아이템 풀을 담을 큐
     Queue<GameObject> itemQueue = new Queue<GameObject>();
 
+
     //활성화되어있는 큐브들
     private List<GameObject> cubes = new List<GameObject>();
+
+    private List<GameObject> activeCubes = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +34,7 @@ public class GameLogic : MonoBehaviour
         }
         SpawnCube();
     }
-
+    //큐브 초기 생성
     void SpawnCube()
     {
         for (int i = 0; i < spawnPoints.Length; i++)
@@ -40,6 +43,7 @@ public class GameLogic : MonoBehaviour
             GameObject cube = itemQueue.Dequeue();
             //활성화시키고
             cube.SetActive(true);
+            //활성화된 큐브들을 리스트에 넣어준다
             cubes.Add(cube);
             // 아이템의 위치를 잡아준다
             cube.transform.position = spawnPoints[i].transform.position;
@@ -58,6 +62,7 @@ public class GameLogic : MonoBehaviour
             // cubes[i].transform.Translate(Vector3.back);
             StartCoroutine(Co_PreBoxMove(cubes[i]));
         }
+        
         //맨앞 상자 오브젝트 전달
         del_FirstPresent(cubes[0]);
         
