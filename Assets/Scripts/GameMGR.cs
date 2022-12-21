@@ -66,4 +66,13 @@ public class GameMGR : MonoBehaviour
         spawnManager.ReSpawnCube();
         //Player Input State Change
     }
+
+    public void GameOverScore()
+    {
+        //ui매니저에 score값 전달해주기
+        GameMGR._instance.uiMGR.FinalShow(score);
+        Debug.Log(score);
+        //점수를 띄우로 SCORE를 0으로 초기화
+        score = 0;
+    }
 }
