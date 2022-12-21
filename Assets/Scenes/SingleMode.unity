@@ -481,6 +481,7 @@ MonoBehaviour:
   - {fileID: 2049179451}
   - {fileID: 673612492}
   - {fileID: 1191089875}
+  playerInput: {fileID: 0}
   moveSpeed: 1
   ItemCount: 20
 --- !u!4 &780278254
@@ -514,11 +515,10 @@ MonoBehaviour:
   rightPos: {fileID: 1731710193}
   centerPos: {fileID: 1550584963}
   targetPos: {fileID: 0}
-  PlayerInput: {fileID: 0}
-  gameLogic: {fileID: 0}
+  playerInput: {fileID: 0}
+  spawnManager: {fileID: 0}
   present: {fileID: 0}
   presentInfo: {fileID: 0}
-  presentRigidBody: {fileID: 0}
   moveSpeed: 1
 --- !u!1 &1191089874
 GameObject:
@@ -610,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canClick: 0
+  arriveFirstPos: 0
 --- !u!1 &1351819163
 GameObject:
   m_ObjectHideFlags: 0
