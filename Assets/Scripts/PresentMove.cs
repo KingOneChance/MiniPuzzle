@@ -9,7 +9,9 @@ public class PresentMove : MonoBehaviour
     [SerializeField] private GameObject centerPos;
     [SerializeField] private GameObject targetPos = null;
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private GameLogic gameLogic = null;
+    [SerializeField] private SpawnManager spawnManager = null;
+
+
 
     [SerializeField] private GameObject present = null;
     [SerializeField] private PresentInfo presentInfo = null;
@@ -21,8 +23,9 @@ public class PresentMove : MonoBehaviour
     {
         playerInput = FindObjectOfType<PlayerInput>();
         playerInput.del_PlayerClick = MoveDirection;
-        gameLogic = FindObjectOfType<GameLogic>();
-        gameLogic.del_FirstPresent = FirstPresent;
+
+        spawnManager = FindObjectOfType<SpawnManager>();
+        spawnManager.del_FirstPresent = FirstPresent;
         targetPos = centerPos;
     }
     private void MoveDirection(int dir)
@@ -41,7 +44,7 @@ public class PresentMove : MonoBehaviour
     private void Move()
     {
         //상태가 선물일 경우 
-        if (presentInfo.stateInfo == PresentInfo.PresentState.Present)
+        if (presentInfo.stateInfo == PresentInfo.PresentState.Red)
         {
             Debug.Log("?");
             presentInfo.PresentMove(targetPos);
@@ -53,7 +56,7 @@ public class PresentMove : MonoBehaviour
             }
         }
         //상태가 폭탄일 경우
-        else if (presentInfo.stateInfo == PresentInfo.PresentState.Bomb)
+        else if (presentInfo.stateInfo == PresentInfo.PresentState.Blue)
         {
             Debug.Log("?");
             presentInfo.PresentMove(targetPos);
