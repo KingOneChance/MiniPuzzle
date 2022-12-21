@@ -41,7 +41,7 @@ public class PresentMove : MonoBehaviour
     private void Move()
     {
         //상태가 선물일 경우 
-        if (presentInfo.stateInfo == PresentInfo.PresentState.Present)
+        if (presentInfo.stateInfo == PresentInfo.PresentState.Blue)
         {
             Debug.Log("?");
             gameObject.transform.LookAt(targetPos.transform);
@@ -53,7 +53,7 @@ public class PresentMove : MonoBehaviour
             }
         }
         //상태가 폭탄일 경우
-        else if (presentInfo.stateInfo == PresentInfo.PresentState.Bomb)
+        else if (presentInfo.stateInfo == PresentInfo.PresentState.Red)
         {
             Debug.Log("?");
             gameObject.transform.LookAt(targetPos.transform);

@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class PresentInfo : MonoBehaviour
 {
-
     public enum PresentState
     {
-        Bomb,
-        Present,
+        Red,
+        Blue,
+        Gold,
     }
     [SerializeField] private PresentState state;
     //선물 오브젝트 풀
-    [SerializeField] private SpawnManager gameLogic;
+    [SerializeField] private SpawnManager spawnManager;
 
     public PresentState stateInfo { get { return state; } }
 
     private void Start()
     {
-        gameLogic = FindObjectOfType<SpawnManager>();
-        if (gameObject.tag == "Present") state = PresentState.Present;
-        else if (gameObject.tag == "Bomb") state = PresentState.Bomb;
+        spawnManager = FindObjectOfType<SpawnManager>();
+        if (gameObject.tag == "Red") state = PresentState.Red;
+        else if (gameObject.tag == "Blue") state = PresentState.Blue;
+        else if (gameObject.tag == "Gold") state = PresentState.Gold;
         else Debug.Log("This Object don't have any tag.");
     }
 
     public void ActiveFalse()
     {
-        gameLogic.ChangePosition();
+        spawnManager.ChangePosition();
     }
 }

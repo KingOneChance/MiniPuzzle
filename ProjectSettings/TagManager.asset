@@ -5,10 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - CheckPoint
-  - Present
-  - Bomb
   - LeftPos
   - RightPos
+  - Blue
+  - Red
+  - Gold
+  - Present
   layers:
   - Default
   - TransparentFX
