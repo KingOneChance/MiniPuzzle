@@ -11,6 +11,11 @@ public class PlayerInput : MonoBehaviour
 
     public bool arriveFirstPos;
     private int dir;
+    public void Awake()
+    {
+        GameMGR._instance.SingleSceneAwak();
+    }
+
     public void Start()
     {
         canClick = true;

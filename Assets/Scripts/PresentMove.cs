@@ -62,6 +62,7 @@ public class PresentMove : MonoBehaviour
                 //일시적으로 키입력 막는 로직
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
+                GameMGR._instance.InitFeverCount();
             }
         }
         //상태가 폭탄일 경우
@@ -83,6 +84,7 @@ public class PresentMove : MonoBehaviour
                 //일시적으로 키입력 막는 로직
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
+                GameMGR._instance.InitFeverCount();
             }
         }
     }
