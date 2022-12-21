@@ -649,7 +649,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   Fever: 0
   moveSpeed: 1
-  ItemCount: 20
+  ItemCount: 150
 --- !u!4 &780278254
 Transform:
   m_ObjectHideFlags: 0
@@ -1350,6 +1350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
+      propertyPath: time
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
       propertyPath: goldAward
       value: 
