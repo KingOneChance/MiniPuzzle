@@ -55,11 +55,19 @@ public class SpawnManager : MonoBehaviour
     //큐브 초기 생성
     void SpawnCube()
     {
-        for (int i = 0; i < spawnPoints.Length-1; i++)
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
+        {
+            //엑티브큐브 리스틀르 비활성화시키고
+            activeCubes[i].SetActive(false);
+        }
+        //리스트를 비우고
+        activeCubes.Clear();
+
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
         {
             int rand = Random.Range(0, 2);
 
-            if(rand == 0)
+            if (rand == 0)
             {
                 //큐에서 꺼내고
                 GameObject redCube = redQueue.Dequeue();
@@ -86,15 +94,67 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //골드상자 위치 초기화
+    public void FeverScore()
+    {
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
+        {
+            //엑티브큐브 리스틀르 비활성화시키고
+            activeCubes[i].SetActive(false);
+        }
+        //리스트를 비우고
+        activeCubes.Clear();
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
+        {
+            //큐에서 꺼내고
+            GameObject goldCube = goldQueue.Dequeue();
+            //활성화시키고
+            goldCube.SetActive(true);
+            //활성화된 큐브들을 리스트에 넣어준다
+            activeCubes.Add(goldCube);
+            // 아이템의 위치를 잡아준다
+            activeCubes[i].transform.position = spawnPoints[i].transform.position;
+        }
+
+    }
+    public void GoldChangePosition()
+    {
+        List<GameObject> newCubes = new List<GameObject>();
+
+        for (int i = 1; i < spawnPoints.Length - 1; i++)
+        {
+            // cubes[i].transform.Translate(Vector3.back);
+            StartCoroutine(Co_PreBoxMove(activeCubes[i], i));
+            newCubes.Add(activeCubes[i]);
+        }
+
+        activeCubes.Clear();
+        //맨앞 상자 오브젝트 전달
+        del_FirstPresent(newCubes[0]);
+        activeCubes = newCubes;
+        //새로 생성하는것은 랜덤이어야함
+
+        //Cube 큐에서 빼고
+        GameObject goldCube = goldQueue.Dequeue();
+        //활성화
+        goldCube.SetActive(true);
+        //포지션 및 회전값 설정
+        goldCube.transform.position = spawnPoints[6].transform.position;
+        goldCube.transform.rotation = Quaternion.identity;
+        activeCubes.Add(goldCube);
+        StartCoroutine(Co_PreBoxMove(goldCube, -1));
+
+    }
+
     //자리를 한칸씩 옮긴다
     public void ChangePosition()
     {
         List<GameObject> newCubes = new List<GameObject>();
 
-        for (int i = 1; i < spawnPoints.Length-1; i++)
+        for (int i = 1; i < spawnPoints.Length - 1; i++)
         {
             // cubes[i].transform.Translate(Vector3.back);
-            StartCoroutine(Co_PreBoxMove(activeCubes[i],i));
+            StartCoroutine(Co_PreBoxMove(activeCubes[i], i));
             newCubes.Add(activeCubes[i]);
         }
         activeCubes.Clear();
@@ -103,7 +163,7 @@ public class SpawnManager : MonoBehaviour
         activeCubes = newCubes;
         //새로 생성하는것은 랜덤이어야함
         int rand = Random.Range(0, 2);
-        if( rand == 0)
+        if (rand == 0)
         {
             //Cube 큐에서 빼고
             GameObject redCube = redQueue.Dequeue();

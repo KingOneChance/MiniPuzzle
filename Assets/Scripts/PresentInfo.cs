@@ -26,6 +26,7 @@ public class PresentInfo : MonoBehaviour
         else if (gameObject.tag == "Gold") state = PresentState.Gold;
         else Debug.Log("This Object don't have any tag.");
     }
+    
 
     public void ActiveFalse()
     {
@@ -54,4 +55,6 @@ public class PresentInfo : MonoBehaviour
         ActiveFalse();
         yield return time;
     }
+
+
 }
