@@ -21,14 +21,18 @@ public class GameMGR : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private float score;
+    [SerializeField] private int score;
+    [SerializeField] private UiMGR uiMGR;
+
     private void Awake()
     {
+        uiMGR = FindObjectOfType<UiMGR>();
         DontDestroyOnLoad(gameObject);
     }
 
     public void AddScore()
     {
         score += 10;
+        uiMGR.ShowScore(score);
     }
 }
