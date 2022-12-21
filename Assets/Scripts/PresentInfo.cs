@@ -26,6 +26,6 @@ public class PresentInfo : MonoBehaviour
 
     public void ActiveFalse()
     {
-        gameLogic.ChangePosition()
+        gameLogic.ChangePosition();
     }
 }
