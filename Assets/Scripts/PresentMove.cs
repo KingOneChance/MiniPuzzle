@@ -9,7 +9,7 @@ public class PresentMove : MonoBehaviour
     [SerializeField] private GameObject centerPos;
     [SerializeField] private GameObject targetPos = null;
     [SerializeField] private PlayerInput PlayerInput;
-    [SerializeField] private GameLogic gameLogic = null;
+    [SerializeField] private SpawnManager gameLogic = null;
 
     [SerializeField] private GameObject present = null;
     [SerializeField] private PresentInfo presentInfo = null;
@@ -21,7 +21,7 @@ public class PresentMove : MonoBehaviour
     {
         PlayerInput = FindObjectOfType<PlayerInput>();
         PlayerInput.del_PlayerClick = MoveDirection;
-        gameLogic = FindObjectOfType<GameLogic>();
+        gameLogic = FindObjectOfType<SpawnManager>();
         gameLogic.del_FirstPresent = FirstPresent;
         targetPos = centerPos;
     }

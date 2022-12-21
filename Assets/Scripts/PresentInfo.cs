@@ -12,13 +12,13 @@ public class PresentInfo : MonoBehaviour
     }
     [SerializeField] private PresentState state;
     //선물 오브젝트 풀
-    [SerializeField] private GameLogic gameLogic;
+    [SerializeField] private SpawnManager gameLogic;
 
     public PresentState stateInfo { get { return state; } }
 
     private void Start()
     {
-        gameLogic = FindObjectOfType<GameLogic>();
+        gameLogic = FindObjectOfType<SpawnManager>();
         if (gameObject.tag == "Present") state = PresentState.Present;
         else if (gameObject.tag == "Bomb") state = PresentState.Bomb;
         else Debug.Log("This Object don't have any tag.");
