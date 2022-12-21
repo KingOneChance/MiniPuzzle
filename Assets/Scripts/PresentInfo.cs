@@ -26,7 +26,10 @@ public class PresentInfo : MonoBehaviour
         else if (gameObject.tag == "Gold") state = PresentState.Gold;
         else Debug.Log("This Object don't have any tag.");
     }
-
+    private void OnEnable()
+    {
+        gameObject.transform.rotation = Quaternion.identity;
+    }
     public void ActiveFalse()
     {
         playerInput.RestartClick();
