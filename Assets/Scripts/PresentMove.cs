@@ -85,6 +85,7 @@ public class PresentMove : MonoBehaviour
             i++;
             yield return time;
         }
+        gameLogic.ReCycle(present);
         present.gameObject.SetActive(false);
         presentInfo.ActiveFalse();
         yield return time;
