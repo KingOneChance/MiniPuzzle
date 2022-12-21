@@ -20,19 +20,59 @@ public class GameMGR : MonoBehaviour
         }
     }
     #endregion
-
+    public bool feverState;
     [SerializeField] private int score;
+    [SerializeField] private int feverTimeCount;
     [SerializeField] private UiMGR uiMGR;
+    [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] public PlayerInput playerInput;
 
     private void Awake()
     {
-        uiMGR = FindObjectOfType<UiMGR>();
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddScore()
+    public void SingleSceneAwak()
     {
-        score += 10;
+        playerInput = FindObjectOfType<PlayerInput>();
+        spawnManager = FindObjectOfType<SpawnManager>();
+        uiMGR = FindObjectOfType<UiMGR>();
+    }
+
+    public void AddScore(int num)
+    {
+        score += num;
         uiMGR.ShowScore(score);
+        if (feverState == false) feverTimeCount++;
+        if (feverTimeCount == 10)
+        {
+            feverState = true;
+            FeverTime();
+            InitFeverCount();
+        }
+    }
+    public void InitFeverCount() => feverTimeCount = 0;
+    public void FeverTime()
+    {
+        playerInput.RestartClick();
+        spawnManager.FeverScore();
+        Invoke("FeverTimeEnd",5);
+    }
+    public void FeverTimeEnd()
+    {
+        playerInput.RestartClick();
+        feverState = false;
+        InitFeverCount();
+        spawnManager.ReSpawnCube();
+        //Player Input State Change
+    }
+
+    public void GameOverScore()
+    {
+        //ui매니저에 score값 전달해주기
+        GameMGR._instance.uiMGR.FinalShow(score);
+        Debug.Log(score);
+        //점수를 띄우로 SCORE를 0으로 초기화
+        score = 0;
     }
 }

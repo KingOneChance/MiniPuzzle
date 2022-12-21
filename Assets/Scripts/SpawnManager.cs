@@ -14,10 +14,11 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject goldCubePrefab = null;
     [SerializeField] private Transform[] spawnPoints = null;
     [SerializeField] private PlayerInput playerInput = null;
+    [SerializeField] private bool Fever = false;
     [SerializeField] private float moveSpeed = 1;
 
     //각 상자 개수
-    public int ItemCount = 20;
+    [SerializeField] private int ItemCount = 50;
 
     //아이템 풀을 담을 큐
     Queue<GameObject> mainQueue = new Queue<GameObject>();
@@ -33,6 +34,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject redFolder = new GameObject("RedFoler");
+        GameObject blueFolder = new GameObject("BlueFoler");
+        GameObject goldFolder = new GameObject("GoldFoler");
+
         for (int i = 0; i < ItemCount; i++)
         {
             //3가지 큐브 생성됨
@@ -45,6 +50,10 @@ public class SpawnManager : MonoBehaviour
             blueQueue.Enqueue(blue);
             goldQueue.Enqueue(gold);
 
+            red.gameObject.transform.parent = redFolder.transform;
+            blue.gameObject.transform.parent = blueFolder.transform;
+            gold.gameObject.transform.parent = goldFolder.transform;
+
             red.SetActive(false);
             blue.SetActive(false);
             gold.SetActive(false);
@@ -52,14 +61,34 @@ public class SpawnManager : MonoBehaviour
         playerInput = FindObjectOfType<PlayerInput>();
         SpawnCube();
     }
-    //큐브 초기 생성
-    void SpawnCube()
+    public void ReSpawnCube()
     {
-        for (int i = 0; i < spawnPoints.Length-1; i++)
+        Invoke("SpawnCube", 0.5f);
+    }
+
+    private void Update()
+    {
+        Debug.Log("골드큐 개수는 : " + goldQueue.Count);
+    }
+    //큐브 초기 생성
+    public void SpawnCube()
+    {
+        Fever = false;
+        if (activeCubes.Count > 0)
+        {
+            for (int i = 0; i < spawnPoints.Length - 1; i++)
+            {
+                //엑티브큐브 리스틀르 비활성화시키고
+                activeCubes[i].SetActive(false);
+            }
+            //리스트를 비우고
+            activeCubes.Clear();
+        }
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
         {
             int rand = Random.Range(0, 2);
 
-            if(rand == 0)
+            if (rand == 0)
             {
                 //큐에서 꺼내고
                 GameObject redCube = redQueue.Dequeue();
@@ -85,16 +114,56 @@ public class SpawnManager : MonoBehaviour
                 del_FirstPresent(activeCubes[0]);
         }
     }
+    //골드상자 위치 초기화
+    public void FeverScore()
+    {
+        StartCoroutine(Co_FeverStart());
+    }
+    IEnumerator Co_FeverStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Fever = true;
+
+        if (activeCubes.Count > 0)
+        {
+            GameMGR._instance.playerInput.RestartClick();
+            for (int i = 0; i < spawnPoints.Length - 1; i++)
+            {
+                //엑티브큐브 리스틀르 비활성화시키고
+                activeCubes[i].SetActive(false);
+            }
+            //리스트를 비우고
+            activeCubes.Clear();
+        }
+        for (int i = 0; i < spawnPoints.Length - 1; i++)
+        {
+            if (goldQueue.Count == 0) Debug.Log(i);
+            //큐에서 꺼내고
+            GameObject goldCube = goldQueue.Dequeue();
+            //활성화시키고
+            goldCube.SetActive(true);
+            //활성화된 큐브들을 리스트에 넣어준다
+            activeCubes.Add(goldCube);
+            // 아이템의 위치를 잡아준다
+            activeCubes[i].transform.position = spawnPoints[i].transform.position;
+            //Que 채우기
+            goldQueue.Enqueue(goldCube);
+            //맨앞 상자 오브젝트 전달
+            if (i == 0)
+                del_FirstPresent(activeCubes[0]);
+        }
+        yield return null;
+    }
 
     //자리를 한칸씩 옮긴다
     public void ChangePosition()
     {
         List<GameObject> newCubes = new List<GameObject>();
 
-        for (int i = 1; i < spawnPoints.Length-1; i++)
+        for (int i = 1; i < spawnPoints.Length - 1; i++)
         {
             // cubes[i].transform.Translate(Vector3.back);
-            StartCoroutine(Co_PreBoxMove(activeCubes[i],i));
+            StartCoroutine(Co_PreBoxMove(activeCubes[i], i));
             newCubes.Add(activeCubes[i]);
         }
         activeCubes.Clear();
@@ -102,33 +171,47 @@ public class SpawnManager : MonoBehaviour
         del_FirstPresent(newCubes[0]);
         activeCubes = newCubes;
         //새로 생성하는것은 랜덤이어야함
-        int rand = Random.Range(0, 2);
-        if( rand == 0)
+        if (Fever == false)
         {
-            //Cube 큐에서 빼고
-            GameObject redCube = redQueue.Dequeue();
-            //활성화
-            redCube.SetActive(true);
-            //포지션 및 회전값 설정
-            redCube.transform.position = spawnPoints[6].transform.position;
-            redCube.transform.rotation = Quaternion.identity;
-            activeCubes.Add(redCube);
-            StartCoroutine(Co_PreBoxMove(redCube, -1));
+            int rand = Random.Range(0, 2);
+            if (rand == 0)
+            {
+                //Cube 큐에서 빼고
+                GameObject redCube = redQueue.Dequeue();
+                //활성화
+                redCube.SetActive(true);
+                //포지션 및 회전값 설정
+                redCube.transform.position = spawnPoints[6].transform.position;
+                redCube.transform.rotation = Quaternion.identity;
+                activeCubes.Add(redCube);
+                StartCoroutine(Co_PreBoxMove(redCube, -1));
+            }
+            else
+            {
+                //Cube 큐에서 빼고
+                GameObject blueCube = blueQueue.Dequeue();
+                //활성화
+                blueCube.SetActive(true);
+                //포지션 및 회전값 설정
+                blueCube.transform.position = spawnPoints[6].transform.position;
+                blueCube.transform.rotation = Quaternion.identity;
+                activeCubes.Add(blueCube);
+                StartCoroutine(Co_PreBoxMove(blueCube, -1));
+            }
         }
         else
         {
             //Cube 큐에서 빼고
-            GameObject blueCube = blueQueue.Dequeue();
+            GameObject goldCube = goldQueue.Dequeue();
             //활성화
-            blueCube.SetActive(true);
+            goldCube.SetActive(true);
             //포지션 및 회전값 설정
-            blueCube.transform.position = spawnPoints[6].transform.position;
-            blueCube.transform.rotation = Quaternion.identity;
-            activeCubes.Add(blueCube);
-            StartCoroutine(Co_PreBoxMove(blueCube, -1));
+            goldCube.transform.position = spawnPoints[6].transform.position;
+            goldCube.transform.rotation = Quaternion.identity;
+            activeCubes.Add(goldCube);
+            StartCoroutine(Co_PreBoxMove(goldCube, -1));
         }
     }
-
     public void ReCycle(GameObject present)
     {
         if (present.tag == "Red")
@@ -140,7 +223,6 @@ public class SpawnManager : MonoBehaviour
         else
             Debug.Log("It is empty tag");
     }
-
     WaitForFixedUpdate time = new WaitForFixedUpdate();
     IEnumerator Co_PreBoxMove(GameObject cube, int num)
     {

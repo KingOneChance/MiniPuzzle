@@ -26,7 +26,10 @@ public class PresentInfo : MonoBehaviour
         else if (gameObject.tag == "Gold") state = PresentState.Gold;
         else Debug.Log("This Object don't have any tag.");
     }
-
+    private void OnEnable()
+    {
+        gameObject.transform.rotation = Quaternion.identity;
+    }
     public void ActiveFalse()
     {
         playerInput.RestartClick();
@@ -35,11 +38,14 @@ public class PresentInfo : MonoBehaviour
 
     public void PresentMove(GameObject target)
     {
+        if (target.activeInHierarchy != false)
         StartCoroutine(Co_PresentMove(target));
     }
     WaitForFixedUpdate time = new WaitForFixedUpdate();
     IEnumerator Co_PresentMove(GameObject targetPos)
     {
+        ActiveFalse();
+
         int i = 0;
         //  presentRigidBody.transform.LookAt(targetPos.transform.position);
         gameObject.transform.LookAt(targetPos.transform.position);
@@ -51,7 +57,7 @@ public class PresentInfo : MonoBehaviour
         }
         spawnManager.ReCycle(gameObject);
         gameObject.gameObject.SetActive(false);
-        ActiveFalse();
+
         yield return time;
     }
 }

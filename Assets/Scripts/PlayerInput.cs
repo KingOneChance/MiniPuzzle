@@ -8,43 +8,54 @@ public class PlayerInput : MonoBehaviour
     public Del_PlayerClick del_PlayerClick;
     [SerializeField] private bool canClick;
     [SerializeField] private bool freeze;
-
     public bool arriveFirstPos;
     private int dir;
+    public void Awake()
+    {
+        GameMGR._instance.SingleSceneAwak();
+    }
+
     public void Start()
     {
         canClick = true;
         arriveFirstPos = true;
     }
+    int count = 0;
     void Update()
     {
-        if (canClick==false||arriveFirstPos==false||freeze==true) return;
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (canClick == false || arriveFirstPos == false || freeze == true) return;
+        if (Input.GetKeyDown(KeyCode.Z) && GameMGR._instance.feverState == false)
         {
             dir = -1;
             del_PlayerClick(dir);
-            canClick = false;
+         //   canClick = false;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.C) && GameMGR._instance.feverState == false)
         {
             dir = 1;
             del_PlayerClick(dir);
-            canClick = false;
+        //    canClick = false;
+        }
+        if (Input.GetKeyDown(KeyCode.X) && GameMGR._instance.feverState == true)
+        {
+            count++;
+            Debug.Log(count);
+            dir = 0;
+            del_PlayerClick(dir);
+        //    canClick = false;
         }
     }
-    
+
     public void FreezeClick()
     {
         freeze = true;
     }
     public void RestartClick()
     {
-        Debug.Log("«ÿ¡¶");
         canClick = true;
     }
     public void UnFreezeClick()
     {
-        Debug.Log("æÛ¿Ω∂Ø");
         freeze = false;
     }
 }
