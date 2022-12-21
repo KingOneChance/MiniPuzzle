@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
+    //움직일 선물상자를 전달해주는 델리게이트
+    public delegate void Del_FirstPresent(GameObject present);
+    public Del_FirstPresent del_FirstPresent;
+
     [SerializeField] private GameObject cubePrefabs = null;
     [SerializeField] private Transform[] spawnPoints = null;
+    [SerializeField] private float moveSpeed = 1;
 
     public int ItemCount = 20;
 
@@ -38,26 +43,39 @@ public class GameLogic : MonoBehaviour
             cubes.Add(cube);
             // 아이템의 위치를 잡아준다
             cube.transform.position = spawnPoints[i].transform.position;
+
+            //맨앞 상자 오브젝트 전달
+            if (i == 0)
+                del_FirstPresent(cube);
         }
     }
 
     //자리를 한칸씩 옮긴다
-    void ChangePosition()
+    public void ChangePosition()
     {
         for (int i = 1; i < spawnPoints.Length; i++)
         {
-            cubes[i].transform.Translate(Vector3.back, Space.Self);
+            // cubes[i].transform.Translate(Vector3.back);
+            StartCoroutine(Co_PreBoxMove(cubes[i]));
         }
+        //맨앞 상자 오브젝트 전달
+        del_FirstPresent(cubes[0]);
+        
         GameObject cube = itemQueue.Dequeue();
         cube.SetActive(true);
         cubes.Add(cube);
-
     }
 
-    // Update is called once per frame
-    void Update()
+    WaitForFixedUpdate time = new WaitForFixedUpdate();
+    IEnumerator Co_PreBoxMove(GameObject cube)
     {
-
+        int i = 0;
+        while (i < 20)
+        {
+            cube.transform.Translate(Vector3.forward * -0.1f * moveSpeed);
+            i++;
+            yield return time;
+        }
+        yield return time;
     }
-
 }
