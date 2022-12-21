@@ -73,8 +73,6 @@ public class SpawnManager : MonoBehaviour
             //리스트를 비우고
             activeCubes.Clear();
         }
-
-
         for (int i = 0; i < spawnPoints.Length - 1; i++)
         {
             int rand = Random.Range(0, 2);
