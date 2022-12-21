@@ -143,8 +143,6 @@ public class SpawnManager : MonoBehaviour
         yield return null;
     }
 
-
-
     //자리를 한칸씩 옮긴다
     public void ChangePosition()
     {
