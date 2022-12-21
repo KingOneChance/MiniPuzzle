@@ -8,7 +8,7 @@ public class UiMGR : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private float time = 5;
+    [SerializeField] private float time = 100;
 
 
     //화면 덮을 배경

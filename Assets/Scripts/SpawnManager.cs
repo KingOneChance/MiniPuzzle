@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float moveSpeed = 1;
 
     //각 상자 개수
-    public int ItemCount = 20;
+    [SerializeField] private int ItemCount = 50;
 
     //아이템 풀을 담을 큐
     Queue<GameObject> mainQueue = new Queue<GameObject>();
@@ -34,6 +34,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject redFolder = new GameObject("RedFoler");
+        GameObject blueFolder = new GameObject("BlueFoler");
+        GameObject goldFolder = new GameObject("GoldFoler");
+
         for (int i = 0; i < ItemCount; i++)
         {
             //3가지 큐브 생성됨
@@ -45,6 +49,10 @@ public class SpawnManager : MonoBehaviour
             redQueue.Enqueue(red);
             blueQueue.Enqueue(blue);
             goldQueue.Enqueue(gold);
+
+            red.gameObject.transform.parent = redFolder.transform;
+            blue.gameObject.transform.parent = blueFolder.transform;
+            gold.gameObject.transform.parent = goldFolder.transform;
 
             red.SetActive(false);
             blue.SetActive(false);
@@ -58,6 +66,10 @@ public class SpawnManager : MonoBehaviour
         Invoke("SpawnCube", 0.5f);
     }
 
+    private void Update()
+    {
+        Debug.Log("골드큐 개수는 : " + goldQueue.Count);
+    }
     //큐브 초기 생성
     public void SpawnCube()
     {
@@ -68,7 +80,6 @@ public class SpawnManager : MonoBehaviour
             {
                 //엑티브큐브 리스틀르 비활성화시키고
                 activeCubes[i].SetActive(false);
-                Debug.Log(i);
             }
             //리스트를 비우고
             activeCubes.Clear();
@@ -126,6 +137,7 @@ public class SpawnManager : MonoBehaviour
         }
         for (int i = 0; i < spawnPoints.Length - 1; i++)
         {
+            if (goldQueue.Count == 0) Debug.Log(i);
             //큐에서 꺼내고
             GameObject goldCube = goldQueue.Dequeue();
             //활성화시키고
@@ -134,6 +146,8 @@ public class SpawnManager : MonoBehaviour
             activeCubes.Add(goldCube);
             // 아이템의 위치를 잡아준다
             activeCubes[i].transform.position = spawnPoints[i].transform.position;
+            //Que 채우기
+            goldQueue.Enqueue(goldCube);
             //맨앞 상자 오브젝트 전달
             if (i == 0)
                 del_FirstPresent(activeCubes[0]);
@@ -198,7 +212,6 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(Co_PreBoxMove(goldCube, -1));
         }
     }
-
     public void ReCycle(GameObject present)
     {
         if (present.tag == "Red")
@@ -209,10 +222,7 @@ public class SpawnManager : MonoBehaviour
             goldQueue.Enqueue(present);
         else
             Debug.Log("It is empty tag");
-        Debug.Log("재활용");
-
     }
-
     WaitForFixedUpdate time = new WaitForFixedUpdate();
     IEnumerator Co_PreBoxMove(GameObject cube, int num)
     {
