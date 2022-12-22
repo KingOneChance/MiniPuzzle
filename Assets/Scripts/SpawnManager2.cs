@@ -13,7 +13,7 @@ public class SpawnManager2 : MonoBehaviour
     [SerializeField] private GameObject blueCubePrefab = null;
     [SerializeField] private GameObject goldCubePrefab = null;
     [SerializeField] private Transform[] spawnPoints = null;
-    [SerializeField] private PlayerInput playerInput = null;
+    [SerializeField] private PlayerInput2 playerInput2 = null;
     [SerializeField] private bool Fever = false;
     [SerializeField] private float moveSpeed = 1;
 
@@ -58,7 +58,7 @@ public class SpawnManager2 : MonoBehaviour
             blue.SetActive(false);
             gold.SetActive(false);
         }
-        playerInput = FindObjectOfType<PlayerInput>();
+        playerInput2 = FindObjectOfType<PlayerInput2>();
         SpawnCube();
     }
     public void ReSpawnCube()
@@ -66,6 +66,7 @@ public class SpawnManager2 : MonoBehaviour
         Invoke("SpawnCube", 0.5f);
     }
 
+   
     //큐브 초기 생성
     public void SpawnCube()
     {
@@ -125,7 +126,7 @@ public class SpawnManager2 : MonoBehaviour
 
         if (activeCubes.Count > 0)
         {
-            GameMGR._instance.playerInput.RestartClick();
+            GameMGR._instance.playerInput2.RestartClick();
             for (int i = 0; i < spawnPoints.Length - 1; i++)
             {
                 //엑티브큐브 리스트를 비활성화시키고
@@ -226,7 +227,7 @@ public class SpawnManager2 : MonoBehaviour
     IEnumerator Co_PreBoxMove(GameObject cube, int num)
     {
         if (num == 1)
-            playerInput.arriveFirstPos = false;
+            playerInput2.arriveFirstPos = false;
         int i = 0;
         while (i < 4)
         {
@@ -235,7 +236,7 @@ public class SpawnManager2 : MonoBehaviour
             yield return time;
         }
         if (num == 1)
-            playerInput.arriveFirstPos = true;
+            playerInput2.arriveFirstPos = true;
         yield return time;
     }
 }
