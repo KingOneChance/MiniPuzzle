@@ -21,7 +21,6 @@ public class SoundMGR : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-       
     }
     public void BGMSoundOn()
     {

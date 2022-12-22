@@ -85,7 +85,7 @@ public class GameMGR : MonoBehaviour
             feverTimeCount++;
             //ui fever Count up
             SendFeverCount();
-            soundMGR.CorrectSound();
+            
         }
         if (feverTimeCount == targetFeverCount)
         {           
@@ -103,7 +103,6 @@ public class GameMGR : MonoBehaviour
         uiMGR.ShowScore2(score2);
         if (feverState2 == false)
         {
-            soundMGR.CorrectSound();
             feverTimeCount2++;
             //ui fever Count up
             SendFeverCount2();
@@ -121,7 +120,6 @@ public class GameMGR : MonoBehaviour
     public void InitFeverCount() 
     { 
         feverTimeCount = 0; 
-        soundMGR.InCorrectSound();
     }
     public void SendFeverCount() => uiMGR.GetFeverCount();
     public void SendInitFeverCount() => uiMGR.GetInitFeverCount();
@@ -129,7 +127,6 @@ public class GameMGR : MonoBehaviour
     public void InitFeverCount2()
     {
         feverTimeCount = 0;
-        soundMGR.InCorrectSound();
     }
     public void SendFeverCount2() => uiMGR.GetFeverCount2();
     public void SendInitFeverCount2() => uiMGR.GetInitFeverCount2();
@@ -167,7 +164,6 @@ public class GameMGR : MonoBehaviour
         //Player Input State Change
     }
 
- 
     public void GameOverScore()
     {
         soundMGR.BGMSoundOff();
