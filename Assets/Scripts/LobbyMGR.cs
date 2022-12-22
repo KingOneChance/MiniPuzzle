@@ -33,6 +33,8 @@ public class LobbyMGR : MonoBehaviour
         multiButton.gameObject.SetActive(true);
         explain1P.gameObject.SetActive(false);
         explain2P.gameObject.SetActive(false);
+
+    
     }
 
     public void OnClick_Home()

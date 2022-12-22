@@ -34,15 +34,19 @@ public class GameMGR : MonoBehaviour
 
     public void SingleSceneAwake()
     {
+ 
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
+
     }
     public void SingleSceneEnd()
     {
+
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
+
     }
 
 
@@ -55,6 +59,7 @@ public class GameMGR : MonoBehaviour
             feverTimeCount++;
             //ui fever Count up
             SendFeverCount();
+
         }
         if (feverTimeCount == 10)
         {
@@ -63,6 +68,7 @@ public class GameMGR : MonoBehaviour
             InitFeverCount();
             //Ui fever Count Init
             SendInitFeverCount();
+
         }
     }
     public void InitFeverCount() => feverTimeCount = 0;
