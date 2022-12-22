@@ -14,6 +14,14 @@ public class LobbyMGR : MonoBehaviour
     [SerializeField] private Image explain1P = null;
     [SerializeField] private Image explain2P = null;
 
+    [SerializeField] private GameMGR gameMGR = null;
+
+    private void Awake()
+    {
+        if (FindObjectOfType<GameMGR>() == null)
+            gameMGR = Instantiate(gameMGR);
+
+    }
 
     private void Start()
     {

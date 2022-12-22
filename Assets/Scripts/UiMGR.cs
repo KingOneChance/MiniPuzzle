@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class UiMGR : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText2;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float time = 100;
 
 
     [Header("FeverCount")]
     [SerializeField] private RawImage[] feverCount;
+    [SerializeField] private RawImage[] feverCount2;
 
     [Header("EndBackGround")]
     //화면 덮을 배경
@@ -34,13 +36,22 @@ public class UiMGR : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      
         for (int i = 0; i < feverCount.Length; i++)
         {
             feverCount[i].gameObject.SetActive(false);
         }
-
         scoreText.text = "Score : 0";
         timerText.text = "Time : 100";
+        //multi mode Text and feverTimeCount
+        if (scoreText2 != null)
+        {
+            for (int i = 0; i < feverCount2.Length; i++)
+            {
+                feverCount2[i].gameObject.SetActive(false);
+            }
+            scoreText2.text = "Score : 0";
+        }
 
         backGroundMain.gameObject.SetActive(false);
         backGround.gameObject.SetActive(false);
@@ -74,6 +85,10 @@ public class UiMGR : MonoBehaviour
     public void ShowScore(int score)
     {
         scoreText.text = "Score : " + score;
+    }
+    public void ShowScore2(int score)
+    {
+        scoreText2.text = "Score : " + score;
     }
 
     public void FinalShow(int score)
@@ -109,6 +124,8 @@ public class UiMGR : MonoBehaviour
 
     public void On_ClickGameReset()
     {
+        if (GameMGR._instance.isSingleMode == false)
+            GameMGR._instance.MultiSceneEnd();
         GameMGR._instance.SingleSceneEnd();
         SceneManager.LoadScene("LobbyScene");
     }
@@ -118,6 +135,12 @@ public class UiMGR : MonoBehaviour
         feverCount[count].gameObject.SetActive(true);
         count++;
     }
+    int count2 = 0;
+    public void GetFeverCount2()
+    {
+        feverCount2[count2].gameObject.SetActive(true);
+        count2++;
+    }
     public void GetInitFeverCount()
     {
         count = 0;
@@ -125,6 +148,15 @@ public class UiMGR : MonoBehaviour
         {
             if (feverCount[i].gameObject.activeSelf == true)
                 feverCount[i].gameObject.SetActive(false);
+        }
+    }
+    public void GetInitFeverCount2()
+    {
+        count2 = 0;
+        for (int i = 0; i < feverCount.Length; i++)
+        {
+            if (feverCount2[i].gameObject.activeSelf == true)
+                feverCount2[i].gameObject.SetActive(false);
         }
     }
 }
