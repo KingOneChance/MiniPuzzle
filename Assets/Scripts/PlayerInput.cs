@@ -36,7 +36,7 @@ public class PlayerInput : MonoBehaviour
             del_PlayerClick(dir);
         //    canClick = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && GameMGR._instance.feverState == true)
+        if (Input.GetKeyDown(KeyCode.X) && GameMGR._instance.feverState == true)
         {
             count++;
             Debug.Log(count);

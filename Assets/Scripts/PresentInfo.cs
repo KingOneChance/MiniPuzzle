@@ -54,7 +54,7 @@ public class PresentInfo : MonoBehaviour
             yield return time;
         }
         spawnManager.ReCycle(gameObject);
-        gameObject.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         yield return time;
     }
 }
