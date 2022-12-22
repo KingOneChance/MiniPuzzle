@@ -33,20 +33,22 @@ public class GameMGR : MonoBehaviour
     [SerializeField] public PlayerInput playerInput;
     [SerializeField] public PlayerInput2 playerInput2;
     [SerializeField] public bool isSingleMode;
-
+    [SerializeField] public bool isGameOver;
     [SerializeField] public SoundMGR soundMGR;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
+  
     public void FindSoundMGR()
     {
-        if(soundMGR ==null)
+        if(soundMGR == null)    
         soundMGR = FindObjectOfType<SoundMGR>();
     }
+
     public void SingleSceneAwake()
     {
+        isGameOver = false;
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
@@ -61,7 +63,7 @@ public class GameMGR : MonoBehaviour
     }
     public void MultiSceneAwake()
     {
-        
+        isGameOver = false;
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         playerInput2 = FindObjectOfType<PlayerInput2>();
@@ -147,6 +149,7 @@ public class GameMGR : MonoBehaviour
     }
     public void FeverTimeEnd()
     {
+        if (isGameOver == true) return;
         playerInput.RestartClick();
         feverState = false;
         InitFeverCount();
@@ -157,6 +160,7 @@ public class GameMGR : MonoBehaviour
     }
     public void FeverTimeEnd2()
     {
+        if (isGameOver == true) return;
         playerInput2.RestartClick();
         feverState2 = false;
         InitFeverCount2();
@@ -168,6 +172,7 @@ public class GameMGR : MonoBehaviour
 
     public void GameOverScore()
     {
+        isGameOver = true;
         soundMGR.BGMSoundOff();
         soundMGR.GameOverSound();
         int winnerScore = 0;

@@ -15,19 +15,20 @@ public class LobbyMGR : MonoBehaviour
     [SerializeField] private Image explain2P = null;
 
     [SerializeField] private GameMGR gameMGR = null;
-    [SerializeField] private SoundMGR sounMGR = null;
+    [SerializeField] private SoundMGR soundMGR = null;
 
     private void Awake()
     {
         if (FindObjectOfType<GameMGR>() == null)
             gameMGR = Instantiate(gameMGR);
         if (FindObjectOfType<SoundMGR>() == null)
-            sounMGR = Instantiate(sounMGR);
+            soundMGR = Instantiate(soundMGR);
     }
 
     private void Start()
     {
         GameMGR._instance.FindSoundMGR();
+
         singleButton.gameObject.SetActive(false);
         multiButton.gameObject.SetActive(false);
         explain1P.gameObject.SetActive(false);
