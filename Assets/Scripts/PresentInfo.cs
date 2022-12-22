@@ -45,9 +45,7 @@ public class PresentInfo : MonoBehaviour
     IEnumerator Co_PresentMove(GameObject targetPos)
     {
         ActiveFalse();
-
         int i = 0;
-        //  presentRigidBody.transform.LookAt(targetPos.transform.position);
         gameObject.transform.LookAt(targetPos.transform.position);
         while (i < 4)
         {
@@ -57,7 +55,6 @@ public class PresentInfo : MonoBehaviour
         }
         spawnManager.ReCycle(gameObject);
         gameObject.gameObject.SetActive(false);
-
         yield return time;
     }
 }
