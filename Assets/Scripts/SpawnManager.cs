@@ -96,6 +96,7 @@ public class SpawnManager : MonoBehaviour
                 redCube.SetActive(true);
                 //활성화된 큐브들을 리스트에 넣어준다
                 activeCubes.Add(redCube);
+                redQueue.Enqueue(redCube);
             }
             else
             {
@@ -105,6 +106,8 @@ public class SpawnManager : MonoBehaviour
                 blueCube.SetActive(true);
                 //활성화된 큐브들을 리스트에 넣어준다
                 activeCubes.Add(blueCube);
+                blueQueue.Enqueue(blueCube);
+
             }
             // 아이템의 위치를 잡아준다
             activeCubes[i].transform.position = spawnPoints[i].transform.position;
@@ -129,7 +132,7 @@ public class SpawnManager : MonoBehaviour
             GameMGR._instance.playerInput.RestartClick();
             for (int i = 0; i < spawnPoints.Length - 1; i++)
             {
-                //엑티브큐브 리스틀르 비활성화시키고
+                //엑티브큐브 리스트를 비활성화시키고
                 activeCubes[i].SetActive(false);
             }
             //리스트를 비우고

@@ -12,7 +12,7 @@ public class PlayerInput : MonoBehaviour
     private int dir;
     public void Awake()
     {
-        GameMGR._instance.SingleSceneAwak();
+        GameMGR._instance.SingleSceneAwake();
     }
 
     public void Start()

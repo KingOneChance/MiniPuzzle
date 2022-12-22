@@ -11,23 +11,34 @@ public class UiMGR : MonoBehaviour
     [SerializeField] private float time = 100;
 
 
+    [Header("FeverCount")]
+    [SerializeField] private RawImage[] feverCount;
+
+    [Header("EndBackGround")]
     //화면 덮을 배경
     [SerializeField] private Image backGroundMain = null;
     [SerializeField] private Image backGround = null;
     [SerializeField] private Button homeButton = null;
-    //점수별 등급
+
+    [Header("Tier")]
     [SerializeField] private Image bronzeAward = null;
     [SerializeField] private Image silverAward = null;
     [SerializeField] private Image goldAward = null;
     [SerializeField] private Image platinumAward = null;
     [SerializeField] private Image diamondAward = null;
-    //최종점수
+
+    [Header("Score")]
     [SerializeField] private TextMeshProUGUI finalScore = null;
 
     private bool isStop = false;
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < feverCount.Length; i++)
+        {
+            feverCount[i].gameObject.SetActive(false);
+        }
+
         scoreText.text = "Score : 0";
         timerText.text = "Time : 100";
 
@@ -98,8 +109,22 @@ public class UiMGR : MonoBehaviour
 
     public void On_ClickGameReset()
     {
+        GameMGR._instance.SingleSceneEnd();
         SceneManager.LoadScene("LobbyScene");
-        
     }
-
+    int count=0;
+    public void GetFeverCount()
+    {
+        feverCount[count].gameObject.SetActive(true);
+        count++;
+    }
+    public void GetInitFeverCount()
+    {
+        count = 0;
+        for (int i = 0; i < feverCount.Length; i++)
+        {
+            if (feverCount[i].gameObject.activeSelf == true)
+                feverCount[i].gameObject.SetActive(false);
+        }
+    }
 }

@@ -65,6 +65,7 @@ public class PresentMove : MonoBehaviour
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
+                GameMGR._instance.SendInitFeverCount();
             }
         }
         //상태가 파랑 경우
@@ -85,6 +86,7 @@ public class PresentMove : MonoBehaviour
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
+                GameMGR._instance.SendInitFeverCount();
             }
         }
         //상태가 골드 경우

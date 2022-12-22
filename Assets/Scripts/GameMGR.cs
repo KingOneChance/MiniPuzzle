@@ -32,26 +32,44 @@ public class GameMGR : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SingleSceneAwak()
+    public void SingleSceneAwake()
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+        spawnManager = FindObjectOfType<SpawnManager>();
+        uiMGR = FindObjectOfType<UiMGR>();
+    }
+    public void SingleSceneEnd()
     {
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
     }
 
+
     public void AddScore(int num)
     {
         score += num;
         uiMGR.ShowScore(score);
-        if (feverState == false) feverTimeCount++;
+        if (feverState == false)
+        {
+            feverTimeCount++;
+            //ui fever Count up
+            SendFeverCount();
+        }
         if (feverTimeCount == 10)
         {
             feverState = true;
             FeverTime();
             InitFeverCount();
+            //Ui fever Count Init
+            SendInitFeverCount();
         }
     }
     public void InitFeverCount() => feverTimeCount = 0;
+    public void SendFeverCount() => uiMGR.GetFeverCount();
+    public void SendInitFeverCount() => uiMGR.GetInitFeverCount();
+
+
     public void FeverTime()
     {
         playerInput.RestartClick();
@@ -63,6 +81,8 @@ public class GameMGR : MonoBehaviour
         playerInput.RestartClick();
         feverState = false;
         InitFeverCount();
+        //Ui fever Count Init
+        SendInitFeverCount();
         spawnManager.ReSpawnCube();
         //Player Input State Change
     }
