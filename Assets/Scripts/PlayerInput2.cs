@@ -20,26 +20,24 @@ public class PlayerInput2 : MonoBehaviour
         canClick = true;
         arriveFirstPos = true;
     }
-    int count = 0;
     void Update()
     {
+        if (GameMGR._instance.isGameOver == true) return;
         if (canClick == false || arriveFirstPos == false || freeze == true) return;
-        if (Input.GetKeyDown(KeyCode.Keypad1) && GameMGR._instance.feverState2 == false)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && GameMGR._instance.feverState2 == false)
         {
             dir = -1;
             del_PlayerClick(dir);
          //   canClick = false;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad3) && GameMGR._instance.feverState2 == false)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && GameMGR._instance.feverState2 == false)
         {
             dir = 1;
             del_PlayerClick(dir);
         //    canClick = false;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2) && GameMGR._instance.feverState2 == true)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && GameMGR._instance.feverState2 == true)
         {
-            count++;
-            Debug.Log(count);
             dir = 0;
             del_PlayerClick(dir);
         //    canClick = false;

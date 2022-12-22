@@ -56,6 +56,7 @@ public class PresentMove2 : MonoBehaviour
             if (targetPos == rightPos)
             {
                 GameMGR._instance.AddScore2(10);
+                GameMGR._instance.soundMGR.CorrectSound();
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
@@ -66,6 +67,7 @@ public class PresentMove2 : MonoBehaviour
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount2();
                 GameMGR._instance.SendInitFeverCount2();
+                GameMGR._instance.soundMGR.InCorrectSound();
             }
         }
         //상태가 파랑 경우
@@ -77,6 +79,7 @@ public class PresentMove2 : MonoBehaviour
             if (targetPos == leftPos)
             {
                 GameMGR._instance.AddScore2(10);
+                GameMGR._instance.soundMGR.CorrectSound();
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
@@ -87,6 +90,7 @@ public class PresentMove2 : MonoBehaviour
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount2();
                 GameMGR._instance.SendInitFeverCount2();
+                GameMGR._instance.soundMGR.InCorrectSound();
             }
         }
         //상태가 골드 경우
@@ -94,6 +98,7 @@ public class PresentMove2 : MonoBehaviour
         {
             presentInfo2.PresentMove(targetPos);
             GameMGR._instance.AddScore2(20);
+            GameMGR._instance.soundMGR.CorrectSound();
         }
     }
     private void PauseCancle() => playerInput2.UnFreezeClick();

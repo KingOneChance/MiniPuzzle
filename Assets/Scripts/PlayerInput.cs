@@ -22,9 +22,9 @@ public class PlayerInput : MonoBehaviour
         canClick = true;
         arriveFirstPos = true;
     }
-    int count = 0;
     void Update()
     {
+        if (GameMGR._instance.isGameOver == true) return;
         if (canClick == false || arriveFirstPos == false || freeze == true) return;
         if (Input.GetKeyDown(KeyCode.Z) && GameMGR._instance.feverState == false)
         {
@@ -40,8 +40,7 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X) && GameMGR._instance.feverState == true)
         {
-            count++;
-            Debug.Log(count);
+       
             dir = 0;
             del_PlayerClick(dir);
         //    canClick = false;

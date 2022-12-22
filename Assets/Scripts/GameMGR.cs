@@ -39,11 +39,11 @@ public class GameMGR : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-  
+
     public void FindSoundMGR()
     {
-        if(soundMGR == null)    
-        soundMGR = FindObjectOfType<SoundMGR>();
+        if (soundMGR == null)
+            soundMGR = FindObjectOfType<SoundMGR>();
     }
 
     public void SingleSceneAwake()
@@ -60,8 +60,9 @@ public class GameMGR : MonoBehaviour
         spawnManager = null;
         uiMGR = null;
         isSingleMode = false;
-        isGameOver=false;
+        isGameOver = false;
         feverState = false;
+        feverTimeCount = 0;
     }
     public void MultiSceneAwake()
     {
@@ -84,6 +85,8 @@ public class GameMGR : MonoBehaviour
         isGameOver = false;
         feverState = false;
         feverState2 = false;
+        feverTimeCount = 0;
+        feverTimeCount2 = 0;
     }
     public void AddScore(int num)
     {
@@ -94,16 +97,17 @@ public class GameMGR : MonoBehaviour
             feverTimeCount++;
             //ui fever Count up
             SendFeverCount();
-            
+
         }
         if (feverTimeCount == targetFeverCount)
-        {           
+        {
             feverState = true;
             FeverTime();
             InitFeverCount();
             //Ui fever Count Init
             SendInitFeverCount();
             soundMGR.FeverTimeSound();
+            uiMGR.ShowFeverLogo();
         }
     }
     public void AddScore2(int num)
@@ -124,19 +128,14 @@ public class GameMGR : MonoBehaviour
             //Ui fever Count Init
             SendInitFeverCount2();
             soundMGR.FeverTimeSound();
+            uiMGR.ShowFeverLogo2();
         }
     }
-    public void InitFeverCount() 
-    { 
-        feverTimeCount = 0; 
-    }
+    public void InitFeverCount() => feverTimeCount = 0;
     public void SendFeverCount() => uiMGR.GetFeverCount();
     public void SendInitFeverCount() => uiMGR.GetInitFeverCount();
 
-    public void InitFeverCount2()
-    {
-        feverTimeCount = 0;
-    }
+    public void InitFeverCount2() => feverTimeCount2 = 0;
     public void SendFeverCount2() => uiMGR.GetFeverCount2();
     public void SendInitFeverCount2() => uiMGR.GetInitFeverCount2();
 
@@ -144,7 +143,7 @@ public class GameMGR : MonoBehaviour
     {
         playerInput.RestartClick();
         spawnManager.FeverScore();
-        Invoke("FeverTimeEnd",5);
+        Invoke("FeverTimeEnd", 5);
     }
     public void FeverTime2()
     {
@@ -161,6 +160,7 @@ public class GameMGR : MonoBehaviour
         //Ui fever Count Init
         SendInitFeverCount();
         spawnManager.ReSpawnCube();
+        uiMGR.ShowOffFeverLogo();
         //Player Input State Change
     }
     public void FeverTimeEnd2()
@@ -172,6 +172,7 @@ public class GameMGR : MonoBehaviour
         //Ui fever Count Init
         SendInitFeverCount2();
         spawnManager2.ReSpawnCube();
+        uiMGR.ShowOffFeverLogo2();
         //Player Input State Change
     }
 
@@ -180,6 +181,11 @@ public class GameMGR : MonoBehaviour
         isGameOver = true;
         soundMGR.BGMSoundOff();
         soundMGR.GameOverSound();
+        uiMGR.ShowOffFeverLogo();
+        if (isSingleMode == false)
+            uiMGR.ShowOffFeverLogo2();
+
+
         int winnerScore = 0;
         if (isSingleMode == false)
         {

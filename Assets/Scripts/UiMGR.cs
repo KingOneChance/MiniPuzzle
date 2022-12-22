@@ -16,6 +16,10 @@ public class UiMGR : MonoBehaviour
     [SerializeField] private RawImage[] feverCount;
     [SerializeField] private RawImage[] feverCount2;
 
+    [Header("FeverLogo")]
+    [SerializeField] private RawImage feverLogo;
+    [SerializeField] private RawImage feverLogo2;
+
     [Header("EndBackGround")]
     //화면 덮을 배경
     [SerializeField] private Image backGroundMain = null;
@@ -61,6 +65,9 @@ public class UiMGR : MonoBehaviour
         goldAward.gameObject.SetActive(false);
         platinumAward.gameObject.SetActive(false);
         diamondAward.gameObject.SetActive(false);
+        feverLogo.gameObject.SetActive(false); 
+        if(feverLogo2!=null)
+            feverLogo2.gameObject.SetActive(false);
 
         finalScore.gameObject.SetActive(false);
     }
@@ -90,6 +97,10 @@ public class UiMGR : MonoBehaviour
     {
         scoreText2.text = "Score : " + score;
     }
+    public void ShowFeverLogo() => feverLogo.gameObject.SetActive(true);
+    public void ShowFeverLogo2() => feverLogo2.gameObject.SetActive(true);
+    public void ShowOffFeverLogo() => feverLogo.gameObject.SetActive(false);
+    public void ShowOffFeverLogo2() => feverLogo2.gameObject.SetActive(false);
 
     public void FinalShow(int score)
     {
