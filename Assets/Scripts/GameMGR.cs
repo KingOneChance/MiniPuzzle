@@ -156,13 +156,28 @@ public class GameMGR : MonoBehaviour
         //Player Input State Change
     }
 
+ 
     public void GameOverScore()
     {
+        int winnerScore = 0;
         soundMGR.GameOverSound();
+
+        if (isSingleMode == false)
+        {
+            if (score > score2)
+                winnerScore = score;
+            else if (score < score2)
+                winnerScore = score2;
+            else
+                winnerScore = score;
+        }
+        else
+            winnerScore = score;
         //ui매니저에 score값 전달해주기
-        GameMGR._instance.uiMGR.FinalShow(score);
+        GameMGR._instance.uiMGR.FinalShow(winnerScore);
         Debug.Log(score);
         //점수를 띄우로 SCORE를 0으로 초기화
         score = 0;
+        score2 = 0;
     }
 }
