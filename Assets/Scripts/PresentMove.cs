@@ -56,12 +56,14 @@ public class PresentMove : MonoBehaviour
             if (targetPos == rightPos)
             {
                 GameMGR._instance.AddScore(10);
+                GameMGR._instance.soundMGR.CorrectSound();
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
             else if (targetPos == leftPos)
             {
                 //일시적으로 키입력 막는 로직
+                GameMGR._instance.soundMGR.InCorrectSound();
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
@@ -77,12 +79,14 @@ public class PresentMove : MonoBehaviour
             if (targetPos == leftPos)
             {
                 GameMGR._instance.AddScore(10);
+                GameMGR._instance.soundMGR.CorrectSound();
                 //UI 점수 올려주는 함수 호출 
                 //함수 어쩌록 입력하기 
             }
             else if (targetPos == rightPos)
             {
                 //일시적으로 키입력 막는 로직
+                GameMGR._instance.soundMGR.InCorrectSound();
                 playerInput.FreezeClick();
                 Invoke("PauseCancle", 3f);
                 GameMGR._instance.InitFeverCount();
@@ -94,6 +98,7 @@ public class PresentMove : MonoBehaviour
         {
             presentInfo.PresentMove(targetPos);
             GameMGR._instance.AddScore(20);
+            GameMGR._instance.soundMGR.CorrectSound();
         }
     }
     private void PauseCancle() => playerInput.UnFreezeClick();
