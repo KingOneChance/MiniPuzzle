@@ -39,8 +39,10 @@ public class GameMGR : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-    private void OnEnable()
+
+    public void FindSoundMGR()
     {
+        if(soundMGR ==null)
         soundMGR = FindObjectOfType<SoundMGR>();
     }
     public void SingleSceneAwake()

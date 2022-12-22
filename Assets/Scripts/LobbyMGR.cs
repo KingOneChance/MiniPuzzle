@@ -27,6 +27,7 @@ public class LobbyMGR : MonoBehaviour
 
     private void Start()
     {
+        GameMGR._instance.FindSoundMGR();
         singleButton.gameObject.SetActive(false);
         multiButton.gameObject.SetActive(false);
         explain1P.gameObject.SetActive(false);

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae4bbe5f1e9b804fae69008195633c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgm: {fileID: 0}
   correctSound: {fileID: 8300000, guid: 1329e1cffa3e570429f9e9247b669f0a, type: 3}
   inCorrectSound: {fileID: 8300000, guid: b38a52a1e5535b74898dbc81788935f2, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 49ec1efc410a04d478509653915542f7, type: 3}
@@ -60,7 +61,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1320ee0b0636c814e9f5b294971fcca3, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
