@@ -59,7 +59,9 @@ public class GameMGR : MonoBehaviour
         playerInput = null;
         spawnManager = null;
         uiMGR = null;
-        isSingleMode = false;    
+        isSingleMode = false;
+        isGameOver=false;
+        feverState = false;
     }
     public void MultiSceneAwake()
     {
@@ -79,6 +81,9 @@ public class GameMGR : MonoBehaviour
         spawnManager2 = null;
         uiMGR = null;
         isSingleMode = false;
+        isGameOver = false;
+        feverState = false;
+        feverState2 = false;
     }
     public void AddScore(int num)
     {
