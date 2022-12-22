@@ -8,8 +8,10 @@ public class PlayerInput : MonoBehaviour
     public Del_PlayerClick del_PlayerClick;
     [SerializeField] private bool canClick;
     [SerializeField] private bool freeze;
+
     public bool arriveFirstPos;
     private int dir;
+
     public void Awake()
     {
         GameMGR._instance.SingleSceneAwake();

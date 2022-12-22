@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/MultiMode.unity
-    guid: 008cafa27fac5c04d9c30c740a66b9af
+    guid: 4850de51ef807c94eb4254e9bfbf5c1c
   - enabled: 1
     path: Assets/Scenes/SingleMode.unity
     guid: a84adb2064286dd48a1535ce0f9202b3
