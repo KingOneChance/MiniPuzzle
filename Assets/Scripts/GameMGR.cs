@@ -34,6 +34,7 @@ public class GameMGR : MonoBehaviour
     [SerializeField] public PlayerInput2 playerInput2;
     [SerializeField] public bool isSingleMode;
 
+    [SerializeField] private SoundMGR soundMGR;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -41,6 +42,7 @@ public class GameMGR : MonoBehaviour
 
     public void SingleSceneAwake()
     {
+        soundMGR = FindObjectOfType<SoundMGR>();
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
@@ -55,6 +57,7 @@ public class GameMGR : MonoBehaviour
     }
     public void MultiSceneAwake()
     {
+        soundMGR = FindObjectOfType<SoundMGR>();
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         playerInput2 = FindObjectOfType<PlayerInput2>();
@@ -80,14 +83,16 @@ public class GameMGR : MonoBehaviour
             feverTimeCount++;
             //ui fever Count up
             SendFeverCount();
+            soundMGR.CorrectSound();
         }
         if (feverTimeCount == targetFeverCount)
-        {
+        {           
             feverState = true;
             FeverTime();
             InitFeverCount();
             //Ui fever Count Init
             SendInitFeverCount();
+            soundMGR.FeverTimeSound();
         }
     }
     public void AddScore2(int num)
@@ -96,6 +101,7 @@ public class GameMGR : MonoBehaviour
         uiMGR.ShowScore2(score2);
         if (feverState2 == false)
         {
+            soundMGR.CorrectSound();
             feverTimeCount2++;
             //ui fever Count up
             SendFeverCount2();
@@ -152,6 +158,7 @@ public class GameMGR : MonoBehaviour
 
     public void GameOverScore()
     {
+        soundMGR.GameOverSound();
         //ui매니저에 score값 전달해주기
         GameMGR._instance.uiMGR.FinalShow(score);
         Debug.Log(score);

@@ -11,6 +11,7 @@ public class SoundMGR : MonoBehaviour
     [SerializeField] private AudioClip inCorrectSound = null;
     [SerializeField] private AudioClip buttonClickSound = null;
     [SerializeField] private AudioClip feverTimeSound = null;
+    [SerializeField] private AudioClip gameOverSound = null;
 
     private void Awake()
     {
@@ -44,6 +45,11 @@ public class SoundMGR : MonoBehaviour
     public void FeverTimeSound()
     {
         audioSource.PlayOneShot(feverTimeSound);
+    }
+
+    public void GameOverSound()
+    {
+        audioSource.PlayOneShot(gameOverSound);
     }
 
     // Update is called once per frame
