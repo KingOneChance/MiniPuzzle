@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456c58ef96feac149b1fb21c9fae0f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: {fileID: 0}
+  explainButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  singleButton: {fileID: 0}
+  multiButton: {fileID: 0}
+  explain1P: {fileID: 0}
+  explain2P: {fileID: 0}
+  gameMGR: {fileID: 1882320095956951468, guid: fc0910b6696a87e4ba0016e2c8e7752d, type: 3}
+  soundMGR: {fileID: 4740713881011816896, guid: 0225e36e54945414c8c2129dbb781787, type: 3}

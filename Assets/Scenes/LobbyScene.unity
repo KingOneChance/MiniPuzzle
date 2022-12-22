@@ -610,6 +610,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4740713881011816896, guid: 0225e36e54945414c8c2129dbb781787, type: 3}
     - target: {fileID: 4446989172674609013, guid: 0ca92b3032405724d8c6e8cfdb8b8a7f, type: 3}
+      propertyPath: soundMGR
+      value: 
+      objectReference: {fileID: 4740713881011816896, guid: 0225e36e54945414c8c2129dbb781787, type: 3}
+    - target: {fileID: 4446989172674609013, guid: 0ca92b3032405724d8c6e8cfdb8b8a7f, type: 3}
       propertyPath: explain1P
       value: 
       objectReference: {fileID: 1998871182}
