@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("골드큐 개수는 : " + goldQueue.Count);
+        //Debug.Log("골드큐 개수는 : " + goldQueue.Count);
     }
     //큐브 초기 생성
     public void SpawnCube()
