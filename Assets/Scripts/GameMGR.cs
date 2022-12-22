@@ -34,15 +34,17 @@ public class GameMGR : MonoBehaviour
     [SerializeField] public PlayerInput2 playerInput2;
     [SerializeField] public bool isSingleMode;
 
-    [SerializeField] private SoundMGR soundMGR;
+    [SerializeField] public SoundMGR soundMGR;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
-    public void SingleSceneAwake()
+    private void OnEnable()
     {
         soundMGR = FindObjectOfType<SoundMGR>();
+    }
+    public void SingleSceneAwake()
+    {
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
@@ -57,7 +59,7 @@ public class GameMGR : MonoBehaviour
     }
     public void MultiSceneAwake()
     {
-        soundMGR = FindObjectOfType<SoundMGR>();
+        
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         playerInput2 = FindObjectOfType<PlayerInput2>();
@@ -113,13 +115,22 @@ public class GameMGR : MonoBehaviour
             InitFeverCount2();
             //Ui fever Count Init
             SendInitFeverCount2();
+            soundMGR.FeverTimeSound();
         }
     }
-    public void InitFeverCount() => feverTimeCount = 0;
+    public void InitFeverCount() 
+    { 
+        feverTimeCount = 0; 
+        soundMGR.InCorrectSound();
+    }
     public void SendFeverCount() => uiMGR.GetFeverCount();
     public void SendInitFeverCount() => uiMGR.GetInitFeverCount();
 
-    public void InitFeverCount2() => feverTimeCount2 = 0;
+    public void InitFeverCount2()
+    {
+        feverTimeCount = 0;
+        soundMGR.InCorrectSound();
+    }
     public void SendFeverCount2() => uiMGR.GetFeverCount2();
     public void SendInitFeverCount2() => uiMGR.GetInitFeverCount2();
 
@@ -158,7 +169,9 @@ public class GameMGR : MonoBehaviour
 
     public void GameOverScore()
     {
+        soundMGR.BGMSoundOff();
         soundMGR.GameOverSound();
+        
         //ui매니저에 score값 전달해주기
         GameMGR._instance.uiMGR.FinalShow(score);
         Debug.Log(score);

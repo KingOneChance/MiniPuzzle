@@ -42,7 +42,7 @@ public class LobbyMGR : MonoBehaviour
         explain1P.gameObject.SetActive(false);
         explain2P.gameObject.SetActive(false);
 
-    
+        GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
 
     public void OnClick_Home()
@@ -54,6 +54,8 @@ public class LobbyMGR : MonoBehaviour
         multiButton.gameObject.SetActive(false);
         explain1P.gameObject.SetActive(false);
         explain2P.gameObject.SetActive(false);
+
+        GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
 
     public void OnClick_Explain()
@@ -65,20 +67,24 @@ public class LobbyMGR : MonoBehaviour
         exitButton.gameObject.SetActive(false);
         singleButton.gameObject.SetActive(false);
         multiButton.gameObject.SetActive(false);
+        GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
 
     public void OnClick_Exit()
     {
+        GameMGR._instance.soundMGR.On_ClickBtnSound();
         Application.Quit();
     }
 
 
     public void OnClick_ToSingle()
     {
+        GameMGR._instance.soundMGR.BGMSoundOn();
         SceneManager.LoadScene("SingleMode");
     }
     public void OnClick_ToMulti()
     {
+        GameMGR._instance.soundMGR.BGMSoundOn();
         SceneManager.LoadScene("MultiMode");
     }
 }

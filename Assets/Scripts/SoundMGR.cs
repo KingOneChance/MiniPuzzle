@@ -6,7 +6,7 @@ public class SoundMGR : MonoBehaviour
 {
     private AudioSource audioSource = null;
 
-    //[SerializeField] private AudioClip bgm = null;
+    [SerializeField] private AudioClip bgm = null;
     [SerializeField] private AudioClip correctSound = null;
     [SerializeField] private AudioClip inCorrectSound = null;
     [SerializeField] private AudioClip buttonClickSound = null;
@@ -21,8 +21,20 @@ public class SoundMGR : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+       
     }
-
+    public void BGMSoundOn()
+    {
+        audioSource.clip = bgm;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+    public void BGMSoundOff()
+    {
+        audioSource.clip = null;
+        audioSource.loop = false;
+        audioSource.Stop();
+    }
     public void On_ClickBtnSound()
     {
         audioSource.PlayOneShot(buttonClickSound);
