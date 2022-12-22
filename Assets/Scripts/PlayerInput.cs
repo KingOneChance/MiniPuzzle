@@ -20,6 +20,7 @@ public class PlayerInput : MonoBehaviour
         canClick = true;
         arriveFirstPos = true;
     }
+    int count = 0;
     void Update()
     {
         if (canClick == false || arriveFirstPos == false || freeze == true) return;
@@ -27,20 +28,21 @@ public class PlayerInput : MonoBehaviour
         {
             dir = -1;
             del_PlayerClick(dir);
-            canClick = false;
+         //   canClick = false;
         }
         if (Input.GetKeyDown(KeyCode.C) && GameMGR._instance.feverState == false)
         {
             dir = 1;
             del_PlayerClick(dir);
-            canClick = false;
+        //    canClick = false;
         }
-        if (Input.GetKeyDown(KeyCode.X) && GameMGR._instance.feverState == true)
+        if (Input.GetKeyDown(KeyCode.Space) && GameMGR._instance.feverState == true)
         {
-            Debug.Log("???");
+            count++;
+            Debug.Log(count);
             dir = 0;
             del_PlayerClick(dir);
-            canClick = false;
+        //    canClick = false;
         }
     }
 
