@@ -1236,6 +1236,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5980948138958424584}
     - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
+      propertyPath: startTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 5980948137560128706}
@@ -1271,6 +1275,10 @@ PrefabInstance:
       propertyPath: backGroundMain
       value: 
       objectReference: {fileID: 5980948137886931139}
+    - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
+      propertyPath: startTimerText
+      value: 
+      objectReference: {fileID: 6629964403969010157}
     - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
       propertyPath: feverCount.Array.size
       value: 20
@@ -1890,6 +1898,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6629964403969010157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8304411738473786908, guid: 8459003af54ff34469816fd156dda4ef, type: 3}
+  m_PrefabInstance: {fileID: 6629964403969010155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6685813456112807509 stripped

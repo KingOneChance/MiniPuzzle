@@ -9,7 +9,9 @@ public class UiMGR : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI scoreText2;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI startTimerText;
     [SerializeField] private float time = 100;
+    [SerializeField] private float startTime = 4;
 
 
     [Header("FeverCount")]
@@ -36,17 +38,15 @@ public class UiMGR : MonoBehaviour
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI finalScore = null;
 
-    private bool isStop = false;
     // Start is called before the first frame update
     void Start()
     {
-      
         for (int i = 0; i < feverCount.Length; i++)
         {
             feverCount[i].gameObject.SetActive(false);
         }
         scoreText.text = "Score : 0";
-        timerText.text = "Time : 100";
+        timerText.text = "Time : " + time;
         //multi mode Text and feverTimeCount
         if (scoreText2 != null)
         {
@@ -65,29 +65,43 @@ public class UiMGR : MonoBehaviour
         goldAward.gameObject.SetActive(false);
         platinumAward.gameObject.SetActive(false);
         diamondAward.gameObject.SetActive(false);
-        feverLogo.gameObject.SetActive(false); 
-        if(feverLogo2!=null)
+        feverLogo.gameObject.SetActive(false);
+        if (feverLogo2 != null)
             feverLogo2.gameObject.SetActive(false);
 
         finalScore.gameObject.SetActive(false);
     }
-   
+
+    int c = 0;
     // Update is called once per frame
     void Update()
     {
-        if(time >= 0)
+        if (startTime >= 0)
+        {
+            startTime -= Time.deltaTime;
+            startTimerText.text = "" + (int)startTime;
+        }
+     
+        if (startTime > 0) return;
+
+        if (c == 0)
+        {
+            c++;
+            GameMGR._instance.isGameOver = false;
+            startTimerText.gameObject.SetActive(false);
+        }
+        if (time >= 0)
         {
             time -= Time.deltaTime;
         }
         timerText.text = "Time : " + (int)time;
-        
-        if(time < 0 && isStop ==false)
-        {
-            GameMGR._instance.GameOverScore();
 
-            isStop = true;
+        if (time <= 0&&c==1 )
+        {
+            c++;
+            Debug.Log("0ÃÊ");
+            GameMGR._instance.GameOverScore();
         }
-        
     }
     public void ShowScore(int score)
     {
@@ -110,7 +124,7 @@ public class UiMGR : MonoBehaviour
         {
             diamondAward.gameObject.SetActive(true);
         }
-        else if(score >= 2000)
+        else if (score >= 2000)
         {
             platinumAward.gameObject.SetActive(true);
         }
@@ -124,12 +138,11 @@ public class UiMGR : MonoBehaviour
         }
         else
         {
-            Debug.Log("µé¾î¿È");
             bronzeAward.gameObject.SetActive(true);
         }
         finalScore.gameObject.SetActive(true);
         finalScore.text = score.ToString();
-        
+
         homeButton.gameObject.SetActive(true);
     }
 
@@ -140,7 +153,7 @@ public class UiMGR : MonoBehaviour
         GameMGR._instance.SingleSceneEnd();
         SceneManager.LoadScene("LobbyScene");
     }
-    int count=0;
+    int count = 0;
     public void GetFeverCount()
     {
         feverCount[count].gameObject.SetActive(true);

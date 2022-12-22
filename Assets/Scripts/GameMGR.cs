@@ -48,7 +48,7 @@ public class GameMGR : MonoBehaviour
 
     public void SingleSceneAwake()
     {
-        isGameOver = false;
+        isGameOver = true;
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         uiMGR = FindObjectOfType<UiMGR>();
@@ -60,19 +60,18 @@ public class GameMGR : MonoBehaviour
         spawnManager = null;
         uiMGR = null;
         isSingleMode = false;
-        isGameOver = false;
         feverState = false;
         feverTimeCount = 0;
     }
     public void MultiSceneAwake()
     {
-        isGameOver = false;
+        isGameOver = true;
+        isSingleMode = false;
         playerInput = FindObjectOfType<PlayerInput>();
         spawnManager = FindObjectOfType<SpawnManager>();
         playerInput2 = FindObjectOfType<PlayerInput2>();
         spawnManager2 = FindObjectOfType<SpawnManager2>();
         uiMGR = FindObjectOfType<UiMGR>();
-        isSingleMode = false;
     }
     public void MultiSceneEnd()
     {
