@@ -26,6 +26,7 @@ public class UiMGR : MonoBehaviour
     //화면 덮을 배경
     [SerializeField] private Image backGroundMain = null;
     [SerializeField] private Image backGround = null;
+    [SerializeField] private Image backGround2 = null;
     [SerializeField] private Button homeButton = null;
 
     [Header("Tier")]
@@ -35,8 +36,16 @@ public class UiMGR : MonoBehaviour
     [SerializeField] private Image platinumAward = null;
     [SerializeField] private Image diamondAward = null;
 
+    [Header("Tier2")]
+    [SerializeField] private Image bronzeAward2 = null;
+    [SerializeField] private Image silverAward2 = null;
+    [SerializeField] private Image goldAward2 = null;
+    [SerializeField] private Image platinumAward2 = null;
+    [SerializeField] private Image diamondAward2 = null;
+
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI finalScore = null;
+    [SerializeField] private TextMeshProUGUI finalScore2 = null;
 
     // Start is called before the first frame update
     void Start()
@@ -65,11 +74,22 @@ public class UiMGR : MonoBehaviour
         goldAward.gameObject.SetActive(false);
         platinumAward.gameObject.SetActive(false);
         diamondAward.gameObject.SetActive(false);
-        feverLogo.gameObject.SetActive(false);
-        if (feverLogo2 != null)
-            feverLogo2.gameObject.SetActive(false);
 
+        feverLogo.gameObject.SetActive(false);
         finalScore.gameObject.SetActive(false);
+
+        if (GameMGR._instance.isSingleMode == false)
+        {
+            backGround2.gameObject.SetActive(false);
+            bronzeAward2.gameObject.SetActive(false);
+            silverAward2.gameObject.SetActive(false);
+            goldAward2.gameObject.SetActive(false);
+            platinumAward2.gameObject.SetActive(false);
+            diamondAward2.gameObject.SetActive(false);
+
+            feverLogo2.gameObject.SetActive(false);
+            finalScore2.gameObject.SetActive(false);
+        }
     }
 
     int c = 0;
@@ -99,7 +119,6 @@ public class UiMGR : MonoBehaviour
         if (time <= 0&&c==1 )
         {
             c++;
-            Debug.Log("0초");
             GameMGR._instance.GameOverScore();
         }
     }
@@ -140,10 +159,36 @@ public class UiMGR : MonoBehaviour
         {
             bronzeAward.gameObject.SetActive(true);
         }
+
         finalScore.gameObject.SetActive(true);
         finalScore.text = score.ToString();
-
         homeButton.gameObject.SetActive(true);
+    }
+    public void FinalShow2(int score)
+    {
+        backGround2.gameObject.SetActive(true);
+        if (score >= 3000)
+        {
+            diamondAward2.gameObject.SetActive(true);
+        }
+        else if (score >= 2000)
+        {
+            platinumAward2.gameObject.SetActive(true);
+        }
+        else if (score >= 1500)
+        {
+            goldAward2.gameObject.SetActive(true);
+        }
+        else if (score >= 1000)
+        {
+            silverAward2.gameObject.SetActive(true);
+        }
+        else
+        {
+            bronzeAward2.gameObject.SetActive(true);
+        }
+        finalScore2.gameObject.SetActive(true);
+        finalScore2.text = score.ToString();
     }
 
     public void On_ClickGameReset()

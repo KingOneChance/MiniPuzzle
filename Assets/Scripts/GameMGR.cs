@@ -197,8 +197,11 @@ public class GameMGR : MonoBehaviour
         }
         else
             winnerScore = score;
-        GameMGR._instance.uiMGR.FinalShow(winnerScore);
-        Debug.Log(score);
+
+        //1,2Player Score Record
+        GameMGR._instance.uiMGR.FinalShow(score);
+        if(isSingleMode == false)
+            GameMGR._instance.uiMGR.FinalShow2(score2);
         //점수를 띄우로 SCORE를 0으로 초기화
         score = 0;
         score2 = 0;
