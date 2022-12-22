@@ -15,12 +15,14 @@ public class LobbyMGR : MonoBehaviour
     [SerializeField] private Image explain2P = null;
 
     [SerializeField] private GameMGR gameMGR = null;
+    [SerializeField] private SoundMGR sounMGR = null;
 
     private void Awake()
     {
         if (FindObjectOfType<GameMGR>() == null)
             gameMGR = Instantiate(gameMGR);
-
+        if (FindObjectOfType<SoundMGR>() == null)
+            sounMGR = Instantiate(sounMGR);
     }
 
     private void Start()
