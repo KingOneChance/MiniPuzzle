@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456c58ef96feac149b1fb21c9fae0f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackGroundFirst: {fileID: 0}
   startButton: {fileID: 0}
   explainButton: {fileID: 0}
   exitButton: {fileID: 0}
+  BackGroundSecond: {fileID: 0}
   singleButton: {fileID: 0}
   multiButton: {fileID: 0}
   explain1P: {fileID: 0}
