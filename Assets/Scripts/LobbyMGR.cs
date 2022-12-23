@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class LobbyMGR : MonoBehaviour
 {
+
+    [Header("=====BackGoundFirst=====")]
+    [SerializeField] private GameObject BackGroundFirst = null;
     [SerializeField] private Button startButton = null;
     [SerializeField] private Button explainButton = null;
     [SerializeField] private Button exitButton = null;
+
+    [Header("=====BackGoundSecond=====")]
+    [SerializeField] private GameObject BackGroundSecond = null;
     [SerializeField] private Button singleButton = null;
     [SerializeField] private Button multiButton = null;
-
-    [SerializeField] private Image explain1P = null;
-    [SerializeField] private Image explain2P = null;
+    [SerializeField] private GameObject explain1P = null;
+    [SerializeField] private GameObject explain2P = null;
 
     [SerializeField] private GameMGR gameMGR = null;
     [SerializeField] private SoundMGR soundMGR = null;
@@ -29,58 +34,54 @@ public class LobbyMGR : MonoBehaviour
     {
         GameMGR._instance.FindSoundMGR();
 
+        BackGroundFirst.SetActive(true);
+        BackGroundSecondInit();
+        BackGroundSecond.SetActive(false);
+    }
+    private void BackGroundSecondInit()
+    {
         singleButton.gameObject.SetActive(false);
         multiButton.gameObject.SetActive(false);
-        explain1P.gameObject.SetActive(false);
-        explain2P.gameObject.SetActive(false);
+        explain1P.SetActive(false);
+        explain2P.SetActive(false);
     }
+
 
     //게임시작 버튼
     public void OnClick_GameStart()
     {
-        startButton.gameObject.SetActive(false);
-        explainButton.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
+        BackGroundFirst.SetActive(false);
+        BackGroundSecond.SetActive(true);
         singleButton.gameObject.SetActive(true);
         multiButton.gameObject.SetActive(true);
-        explain1P.gameObject.SetActive(false);
-        explain2P.gameObject.SetActive(false);
 
         GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
-
+    //홈 클릭버튼
     public void OnClick_Home()
     {
-        startButton.gameObject.SetActive(true);
-        explainButton.gameObject.SetActive(true);
-        exitButton.gameObject.SetActive(true);
-        singleButton.gameObject.SetActive(false);
-        multiButton.gameObject.SetActive(false);
-        explain1P.gameObject.SetActive(false);
-        explain2P.gameObject.SetActive(false);
+        BackGroundFirst.SetActive(true);
+        BackGroundSecondInit();
+        BackGroundSecond.SetActive(false);
 
         GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
-
+    //게임 설명 버튼 
     public void OnClick_Explain()
     {
-        explain1P.gameObject.SetActive(true);
-        explain2P.gameObject.SetActive(true);
-        startButton.gameObject.SetActive(false);
-        explainButton.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
-        singleButton.gameObject.SetActive(false);
-        multiButton.gameObject.SetActive(false);
+        BackGroundFirst.SetActive(false);
+        BackGroundSecond.SetActive(true);
+        explain1P.SetActive(true);
+        explain2P.SetActive(true);
+
         GameMGR._instance.soundMGR.On_ClickBtnSound();
     }
-
+   
     public void OnClick_Exit()
     {
         GameMGR._instance.soundMGR.On_ClickBtnSound();
         Application.Quit();
     }
-
-
     public void OnClick_ToSingle()
     {
         GameMGR._instance.soundMGR.BGMSoundOn();

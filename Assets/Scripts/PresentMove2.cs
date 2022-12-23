@@ -12,13 +12,12 @@ public class PresentMove2 : MonoBehaviour
     [SerializeField] private PlayerInput2 playerInput2;
     [SerializeField] private SpawnManager2 spawnManager2 = null;
 
-
-
     [SerializeField] private GameObject present = null;
     [SerializeField] private PresentInfo2 presentInfo2 = null;
     // [SerializeField] private Rigidbody presentRigidBody = null;
 
     [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float freezeTime = 2;
 
     private void Awake()
     {
@@ -64,7 +63,7 @@ public class PresentMove2 : MonoBehaviour
             {
                 //일시적으로 키입력 막는 로직
                 playerInput2.FreezeClick();
-                Invoke("PauseCancle", 3f);
+                Invoke("PauseCancle", freezeTime);
                 GameMGR._instance.InitFeverCount2();
                 GameMGR._instance.SendInitFeverCount2();
                 GameMGR._instance.soundMGR.InCorrectSound();
@@ -87,7 +86,7 @@ public class PresentMove2 : MonoBehaviour
             {
                 //일시적으로 키입력 막는 로직
                 playerInput2.FreezeClick();
-                Invoke("PauseCancle", 3f);
+                Invoke("PauseCancle", freezeTime);
                 GameMGR._instance.InitFeverCount2();
                 GameMGR._instance.SendInitFeverCount2();
                 GameMGR._instance.soundMGR.InCorrectSound();

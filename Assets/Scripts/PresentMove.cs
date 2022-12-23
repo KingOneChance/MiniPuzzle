@@ -19,11 +19,12 @@ public class PresentMove : MonoBehaviour
     // [SerializeField] private Rigidbody presentRigidBody = null;
 
     [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float freezeTime = 2;
 
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-        playerInput.del_PlayerClick = MoveDirection;
+        playerInput.del_Action = MoveDirection;
 
         spawnManager = FindObjectOfType<SpawnManager>();
         spawnManager.del_FirstPresent = FirstPresent;
@@ -65,7 +66,7 @@ public class PresentMove : MonoBehaviour
                 //일시적으로 키입력 막는 로직
                 GameMGR._instance.soundMGR.InCorrectSound();
                 playerInput.FreezeClick();
-                Invoke("PauseCancle", 3f);
+                Invoke("PauseCancle", freezeTime);
                 GameMGR._instance.InitFeverCount();
                 GameMGR._instance.SendInitFeverCount();
             }
@@ -88,7 +89,7 @@ public class PresentMove : MonoBehaviour
                 //일시적으로 키입력 막는 로직
                 GameMGR._instance.soundMGR.InCorrectSound();
                 playerInput.FreezeClick();
-                Invoke("PauseCancle", 3f);
+                Invoke("PauseCancle", freezeTime);
                 GameMGR._instance.InitFeverCount();
                 GameMGR._instance.SendInitFeverCount();
             }

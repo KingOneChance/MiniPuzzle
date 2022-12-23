@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerInput : MonoBehaviour
 {
-    public delegate void Del_PlayerClick(int dir);
-    public Del_PlayerClick del_PlayerClick;
+    public Action<int> del_Action;
+    
     [SerializeField] private bool canClick;
     [SerializeField] private bool freeze;
 
@@ -29,21 +30,17 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && GameMGR._instance.feverState == false)
         {
             dir = -1;
-            del_PlayerClick(dir);
-         //   canClick = false;
+            del_Action(dir);
         }
         if (Input.GetKeyDown(KeyCode.C) && GameMGR._instance.feverState == false)
         {
             dir = 1;
-            del_PlayerClick(dir);
-        //    canClick = false;
+            del_Action(dir);
         }
         if (Input.GetKeyDown(KeyCode.X) && GameMGR._instance.feverState == true)
         {
-       
             dir = 0;
-            del_PlayerClick(dir);
-        //    canClick = false;
+            del_Action(dir);
         }
     }
 
@@ -51,12 +48,12 @@ public class PlayerInput : MonoBehaviour
     {
         freeze = true;
     }
-    public void RestartClick()
-    {
-        canClick = true;
-    }
     public void UnFreezeClick()
     {
         freeze = false;
+    }
+    public void RestartClick()
+    {
+        canClick = true;
     }
 }
