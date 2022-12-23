@@ -691,6 +691,7 @@ MonoBehaviour:
   present: {fileID: 0}
   presentInfo: {fileID: 0}
   moveSpeed: 1
+  freezeTime: 2
 --- !u!1001 &794926909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1221,7 +1222,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
       propertyPath: time
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2542369039190933348, guid: 6144ea87f358ec942aedf505516a7aea, type: 3}
       propertyPath: feverLogo
