@@ -46,12 +46,7 @@ public class SoundMGR : MonoBehaviour
 
     public void InCorrectSound()
     {
-        if (audioSource.isPlaying == true)
-            return;
-        else
-        {
-            audioSource.PlayOneShot(inCorrectSound);
-        }
+        audioSource.PlayOneShot(inCorrectSound);
     }
     public void FeverTimeSound()
     {
