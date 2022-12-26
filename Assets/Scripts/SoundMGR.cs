@@ -34,33 +34,9 @@ public class SoundMGR : MonoBehaviour
         audioSource.loop = false;
         audioSource.Stop();
     }
-    public void On_ClickBtnSound()
-    {
-        audioSource.PlayOneShot(buttonClickSound);
-    }
-
-    public void CorrectSound()
-    {
-        audioSource.PlayOneShot(correctSound);
-    }
-
-    public void InCorrectSound()
-    {
-        audioSource.PlayOneShot(inCorrectSound);
-    }
-    public void FeverTimeSound()
-    {
-        audioSource.PlayOneShot(feverTimeSound);
-    }
-
-    public void GameOverSound()
-    {
-        audioSource.PlayOneShot(gameOverSound);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public void On_ClickBtnSound() => audioSource.PlayOneShot(buttonClickSound);
+    public void CorrectSound() => audioSource.PlayOneShot(correctSound);
+    public void InCorrectSound() => audioSource.PlayOneShot(inCorrectSound);
+    public void FeverTimeSound() => audioSource.PlayOneShot(feverTimeSound);
+    public void GameOverSound() => audioSource.PlayOneShot(gameOverSound);
 }

@@ -92,6 +92,9 @@ public class PresentMove : MonoBehaviour
                 Invoke("PauseCancle", freezeTime);
                 GameMGR._instance.InitFeverCount();
                 GameMGR._instance.SendInitFeverCount();
+
+                //얼음 이펙트 넣기 
+
             }
         }
         //상태가 골드 경우
