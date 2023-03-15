@@ -74,10 +74,10 @@ public class SpawnManager : MonoBehaviour
         {
             for (int i = 0; i < spawnPoints.Length - 1; i++)
             {
-                //엑티브큐브 리스틀르 비활성화시키고
+                //엑티브큐브 리스트를 비활성화시키고
                 activeCubes[i].SetActive(false);
             }
-            //리스트를 비우고
+            //리스트를 비우고  
             activeCubes.Clear();
         }
         for (int i = 0; i < spawnPoints.Length - 1; i++)
